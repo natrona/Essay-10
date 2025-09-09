@@ -1,0 +1,2890 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroPath - Laboratório de Redação Avançado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Existing CSS remains mostly unchanged */
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --gray-light: #e2e8f0;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        header {
+            background: white;
+            box-shadow: var(--shadow-md);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.2em;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+            white-space: nowrap;
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-lg {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.125rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #0d9f6e;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-info {
+            background: var(--info);
+            color: white;
+        }
+
+        .btn-info:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gray);
+        }
+
+        .btn-outline:hover {
+            background: #f1f5f9;
+        }
+
+        .btn-outline-primary {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline-primary:hover {
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--gray-light);
+            margin: 2rem 0 1rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-family: var(--font-body);
+            font-weight: 500;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab.active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-lg {
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title-lg {
+            font-size: 1.5rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-family: var(--font-body);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-input, .form-input select, .form-textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        .form-textarea {
+            min-height: 300px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .form-textarea-lg {
+            min-height: 400px;
+        }
+
+        .form-input:focus, .form-input select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%231e293b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 16px;
+            padding-right: 2.5rem;
+        }
+
+        .char-counter {
+            position: absolute;
+            right: 0.75rem;
+            bottom: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--gray);
+            background: white;
+            padding: 0 0.25rem;
+            border-radius: 4px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .item {
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 1.25rem;
+            transition: var(--transition);
+            border: 1px solid var(--gray-light);
+        }
+
+        .item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .item-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .action-btn:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .empty-state i {
+            font-size: 2.5rem;
+            color: var(--gray-light);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state p {
+            max-width: 400px;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* Feedback Sections */
+        .feedback-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .feedback-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feedback-section {
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .feedback-section:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .feedback-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .feedback-icon.estrutura {
+            background-color: #8b5cf6;
+            box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.1), 0 2px 4px -1px rgba(139, 92, 246, 0.06);
+        }
+
+        .feedback-icon.coesao {
+            background-color: #3b82f6;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1), 0 2px 4px -1px rgba(59, 130, 246, 0.06);
+        }
+
+        .feedback-icon.argumentacao {
+            background-color: #10b981;
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1), 0 2px 4px -1px rgba(16, 185, 129, 0.06);
+        }
+
+        .feedback-icon.norma {
+            background-color: #f59e0b;
+            box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.1), 0 2px 4px -1px rgba(245, 158, 11, 0.06);
+        }
+
+        .feedback-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .feedback-content {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        .feedback-list {
+            list-style-type: none;
+        }
+
+        .feedback-list li {
+            margin-bottom: 0.875rem;
+            padding-left: 1.75rem;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .feedback-list li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary);
+        }
+
+        .feedback-item-icon {
+            color: var(--primary);
+            font-size: 0.9375rem;
+            margin-top: 0.15rem;
+        }
+
+        .feedback-item-text {
+            flex: 1;
+        }
+
+        .score {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+            gap: 0.375rem;
+        }
+
+        .score-high {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .score-medium {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .score-low {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Banco de Temas */
+        .theme-item {
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem;
+            transition: var(--transition);
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .theme-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-left-color: var(--primary-light);
+        }
+
+        .theme-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.0625rem;
+        }
+
+        .theme-example {
+            font-size: 0.9375rem;
+            color: var(--gray);
+            margin-bottom: 0.75rem;
+            font-style: italic;
+            padding-left: 1.75rem;
+            line-height: 1.6;
+        }
+
+        .theme-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .theme-link:hover {
+            text-decoration: underline;
+            color: var(--primary-light);
+        }
+
+        /* Resultado da Correção */
+        .correction-result {
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .correction-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .correction-score {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .correction-score-value {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .correction-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: var(--gray-light);
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            animation: progressShine 2s infinite;
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Loading State */
+        .loading {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Modal de Confirmação */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 1rem;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: modalFadeIn 0.3s forwards;
+        }
+
+        @keyframes modalFadeIn {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .modal-body {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+        }
+
+        /* Notificação */
+        .notification {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            padding: 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            max-width: 90%;
+            width: 350px;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification.success {
+            border-left: 5px solid var(--secondary);
+        }
+
+        .notification.error {
+            border-left: 5px solid var(--danger);
+        }
+
+        .notification.warning {
+            border-left: 5px solid var(--warning);
+        }
+
+        .notification.info {
+            border-left: 5px solid var(--info);
+        }
+
+        .notification i {
+            font-size: 1.5rem;
+            margin-top: 0.125rem;
+        }
+
+        .notification.success i {
+            color: var(--secondary);
+        }
+
+        .notification.error i {
+            color: var(--danger);
+        }
+
+        .notification.warning i {
+            color: var(--warning);
+        }
+
+        .notification.info i {
+            color: var(--info);
+        }
+
+        .notification-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .notification-message {
+            font-size: 0.9375rem;
+            color: var(--dark);
+            line-height: 1.5;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.25rem;
+            margin: -0.25rem -0.25rem -0.25rem 0;
+        }
+
+        /* Dicas Flutuantes */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.875rem;
+            font-weight: normal;
+            line-height: 1.4;
+        }
+
+        .tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--dark) transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Sugestões de Melhoria */
+        .suggestions-container {
+            margin-top: 2rem;
+        }
+
+        .suggestion-item {
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--primary);
+        }
+
+        .suggestion-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            gap: 0.75rem;
+        }
+
+        .suggestion-icon {
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        .suggestion-title {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .suggestion-content {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        .suggestion-original {
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            padding: 0.75rem;
+            margin: 0.75rem 0;
+            font-style: italic;
+            color: var(--gray);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .suggestion-original:before {
+            content: '"';
+            position: absolute;
+            left: 0.5rem;
+            top: 0.5rem;
+            font-size: 1.5rem;
+            color: var(--gray-light);
+        }
+
+        .suggestion-improved {
+            background: #f0fdf4;
+            border-radius: var(--radius-md);
+            padding: 0.75rem;
+            margin: 0.75rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .suggestion-improved:before {
+            content: '"';
+            position: absolute;
+            left: 0.5rem;
+            top: 0.5rem;
+            font-size: 1.5rem;
+            color: var(--gray-light);
+        }
+
+        .suggestion-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        /* Gráfico de Avaliação */
+        .radar-chart {
+            width: 100%;
+            height: 300px;
+            margin: 1.5rem 0;
+        }
+
+        /* Modal de Tipo de Texto Personalizado */
+        .custom-select-modal {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+            margin-top: 0.5rem;
+            padding: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .custom-select-modal.active {
+            display: block;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .custom-select-option {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .custom-select-option:hover {
+            background: #f1f5f9;
+        }
+
+        .custom-select-option i {
+            color: var(--primary);
+            width: 24px;
+            text-align: center;
+        }
+
+        .custom-select-option.active {
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+        }
+
+        .select-trigger {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .select-trigger:after {
+            content: "";
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%231e293b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+        }
+
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .card-lg {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .feedback-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .correction-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .correction-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .card-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .modal-content {
+                margin: 0.75rem;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .tabs {
+                gap: 0.25rem;
+            }
+            
+            .tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 1.25rem;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
+            }
+            
+            .notification {
+                width: calc(100% - 3rem);
+                right: 1.5rem;
+                left: 1.5rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .correction-actions .btn {
+                flex: 1;
+                min-width: calc(50% - 0.375rem);
+            }
+            
+            .card-actions .btn {
+                flex: 1;
+                min-width: calc(50% - 0.375rem);
+            }
+        }
+    </style>
+    <!-- Chart.js para gráficos de avaliação -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-fire"></i>
+                <span>Redação com Base Acadêmica</span>
+            </div>
+            <div class="card-actions">
+                <button class="btn btn-outline" id="helpBtn">
+                    <i class="fas fa-question-circle"></i> Ajuda
+                </button>
+                <button class="btn btn-primary" id="exportBtn">
+                    <i class="fas fa-file-export"></i> Exportar
+                </button>
+                <button class="btn btn-info" id="apiConfigBtn">
+                    <i class="fas fa-key"></i> Configurar API
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" data-tab="correcao">
+                <i class="fas fa-spell-check"></i> Corretor
+            </div>
+            <div class="tab" data-tab="temas">
+                <i class="fas fa-book-open"></i> Banco de Temas
+            </div>
+            <div class="tab" data-tab="historico">
+                <i class="fas fa-history"></i> Histórico
+            </div>
+            <div class="tab" data-tab="estatisticas">
+                <i class="fas fa-chart-line"></i> Estatísticas
+            </div>
+        </div>
+
+        <!-- Corretor de Redação Tab -->
+        <div class="tab-content active" id="correcao">
+            <div class="card card-lg">
+                <div class="card-header">
+                    <div class="card-title card-title-lg">
+                        <i class="fas fa-edit"></i> Corretor de Redação com IA
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-outline" id="templateBtn">
+                            <i class="fas fa-file-alt"></i> Usar Template
+                        </button>
+                        <button class="btn btn-primary" id="analyzeBtn">
+                            <i class="fas fa-search"></i> Analisar
+                        </button>
+                        <button class="btn btn-outline" id="clearBtn">
+                            <i class="fas fa-trash-alt"></i> Limpar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="essayTheme" class="form-label">
+                        <i class="fas fa-quote-left"></i> Tema da Redação
+                        <span class="tooltip">
+                            <i class="fas fa-info-circle" style="color: var(--gray);"></i>
+                            <span class="tooltip-text">Digite o tema central da sua redação para ajudar na análise</span>
+                        </span>
+                    </label>
+                    <input type="text" id="essayTheme" class="form-input" placeholder="Ex: Desafios da educação inclusiva no Brasil">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-tag"></i> Tipo de Redação
+                    </label>
+                    <div class="select-trigger form-input" id="essayTypeTrigger">
+                        <span id="selectedEssayType">Dissertativo-Argumentativo</span>
+                    </div>
+                    <div class="custom-select-modal" id="essayTypeModal">
+                        <div class="custom-select-option active" data-value="dissertativo-argumentativo">
+                            <i class="fas fa-file-alt"></i>
+                            <div>
+                                <div>Dissertativo-Argumentativo</div>
+                                <small>Texto que defende uma tese com argumentos</small>
+                            </div>
+                        </div>
+                        <div class="custom-select-option" data-value="narrativo">
+                            <i class="fas fa-book-open"></i>
+                            <div>
+                                <div>Narrativo</div>
+                                <small>Texto que conta uma história ou narrativa</small>
+                            </div>
+                        </div>
+                        <div class="custom-select-option" data-value="descritivo">
+                            <i class="fas fa-paint-brush"></i>
+                            <div>
+                                <div>Descritivo</div>
+                                <small>Texto que descreve pessoas, lugares ou objetos</small>
+                            </div>
+                        </div>
+                        <div class="custom-select-option" data-value="expositivo">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <div>
+                                <div>Expositivo</div>
+                                <small>Texto que explica ou expõe ideias</small>
+                            </div>
+                        </div>
+                        <div class="custom-select-option" data-value="injuncao">
+                            <i class="fas fa-tasks"></i>
+                            <div>
+                                <div>Injunção</div>
+                                <small>Texto que instrui ou orienta o leitor</small>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="essayType" value="dissertativo-argumentativo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="essayText" class="form-label">
+                        <i class="fas fa-align-left"></i> Digite sua redação
+                        <span class="tooltip">
+                            <i class="fas fa-info-circle" style="color: var(--gray);"></i>
+                            <span class="tooltip-text">Escreva sua redação com atenção à estrutura, coesão e argumentação</span>
+                        </span>
+                    </label>
+                    <textarea id="essayText" class="form-textarea form-textarea-lg" placeholder="Digite seu texto aqui..."></textarea>
+                    <div class="char-counter" id="charCounter">0/1000</div>
+                </div>
+                
+                <!-- Progress Bar (hidden by default) -->
+                <div id="progressContainer" class="progress-container" style="display: none;">
+                    <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+                </div>
+                
+                <!-- Resultado da Correção -->
+                <div id="correctionResult" class="correction-result" style="display: none;">
+                    <div class="correction-header">
+                        <div class="correction-score">
+                            <i class="fas fa-star"></i> Nota Final:
+                            <span class="correction-score-value" id="finalScore">0.0</span>/10.0
+                        </div>
+                        <div class="correction-actions">
+                            <button class="btn btn-outline-primary" id="saveEssayBtn">
+                                <i class="fas fa-save"></i> Salvar
+                            </button>
+                            <button class="btn btn-secondary" id="improveBtn">
+                                <i class="fas fa-magic"></i> Melhorar Texto
+                            </button>
+                            <button class="btn btn-info" id="suggestionsBtn">
+                                <i class="fas fa-lightbulb"></i> Ver Sugestões
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Gráfico de Avaliação -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-chart-pie"></i> Desempenho por Competência
+                            </div>
+                        </div>
+                        <div class="radar-chart">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-container" id="feedbackResults">
+                        <!-- Feedback sections will be inserted here by JavaScript -->
+                    </div>
+                    
+                    <!-- Sugestões de Melhoria -->
+                    <div id="suggestionsContainer" class="suggestions-container" style="display: none;">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-lightbulb"></i> Sugestões de Melhoria
+                                </div>
+                            </div>
+                            <div id="suggestionsContent">
+                                <!-- Sugestões serão inseridas aqui pelo JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Banco de Temas Tab -->
+        <div class="tab-content" id="temas">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-award"></i> Banco de Temas com Redações Nota 10
+                    </div>
+                    <div class="card-actions">
+                        <div class="form-group" style="margin-bottom: 0; min-width: 200px;">
+                            <select id="filterCategory" class="form-input form-select">
+                                <option value="all">Todas as categorias</option>
+                                <option value="social">Social</option>
+                                <option value="educacao">Educação</option>
+                                <option value="tecnologia">Tecnologia</option>
+                                <option value="meio-ambiente">Meio Ambiente</option>
+                                <option value="saude">Saúde</option>
+                                <option value="politica">Política</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-outline" id="filterBtn">
+                            <i class="fas fa-filter"></i> Filtrar
+                        </button>
+                        <button class="btn btn-primary" id="newThemeBtn">
+                            <i class="fas fa-plus"></i> Novo Tema
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-label">
+                        <i class="fas fa-search"></i> Pesquisar temas
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="searchThemes" class="form-input" placeholder="Digite para buscar...">
+                        <button class="btn btn-outline" id="searchBtn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="grid" id="themesGrid">
+                    <!-- Sample themes will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Histórico Tab -->
+        <div class="tab-content" id="historico">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-history"></i> Histórico de Redações
+                    </div>
+                    <div class="card-actions">
+                        <div class="form-group" style="margin-bottom: 0; min-width: 150px;">
+                            <select id="filterHistory" class="form-input form-select">
+                                <option value="all">Todas</option>
+                                <option value="last-week">Última semana</option>
+                                <option value="last-month">Último mês</option>
+                                <option value="high-scores">Melhores notas</option>
+                                <option value="low-scores">Para melhorar</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-outline" id="refreshHistoryBtn">
+                            <i class="fas fa-sync-alt"></i> Atualizar
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="historyContent">
+                    <div class="empty-state">
+                        <i class="fas fa-clock"></i>
+                        <h4>Nenhuma redação encontrada no histórico</h4>
+                        <p>Suas redações analisadas aparecerão aqui para consulta futura</p>
+                        <button class="btn btn-primary" id="createNewEssayBtn">
+                            <i class="fas fa-plus"></i> Criar nova redação
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estatísticas Tab -->
+        <div class="tab-content" id="estatisticas">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-chart-line"></i> Minhas Estatísticas
+                    </div>
+                    <div class="card-actions">
+                        <div class="form-group" style="margin-bottom: 0; min-width: 150px;">
+                            <select id="statsPeriod" class="form-input form-select">
+                                <option value="last-month">Último mês</option>
+                                <option value="last-3months">Últimos 3 meses</option>
+                                <option value="last-6months">Últimos 6 meses</option>
+                                <option value="all-time">Todo período</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="statsContent">
+                    <div class="empty-state">
+                        <i class="fas fa-chart-bar"></i>
+                        <h4>Dados estatísticos não disponíveis</h4>
+                        <p>Analise algumas redações para gerar estatísticas de desempenho</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Configuração da API -->
+    <div class="modal-overlay" id="apiConfigModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-key"></i> Configuração da API Gemini
+                </h3>
+                <button class="action-btn" id="closeApiConfigModalBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="apiKey" class="form-label">
+                        <i class="fas fa-key"></i> Chave da API Gemini
+                    </label>
+                    <input type="password" id="apiKey" class="form-input" placeholder="Digite sua chave da API Gemini">
+                    <p class="form-text" style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--gray);">
+                        Sua chave é armazenada localmente no navegador e não é enviada para nossos servidores.
+                    </p>
+                </div>
+                
+                <div class="card" style="background-color: #f8fafc; border-left: 4px solid var(--info);">
+                    <div class="card-title">
+                        <i class="fas fa-info-circle"></i> Como obter uma chave da API Gemini
+                    </div>
+                    <ol style="padding-left: 1.5rem; margin: 0;">
+                        <li>Acesse <a href="https://aistudio.google.com/" target="_blank">Google AI Studio</a></li>
+                        <li>Faça login com sua conta Google</li>
+                        <li>Clique em "Get API Key" no menu lateral</li>
+                        <li>Crie uma nova chave de API</li>
+                        <li>Copie e cole a chave no campo acima</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelApiConfigBtn">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button class="btn btn-primary" id="saveApiKeyBtn">
+                    <i class="fas fa-save"></i> Salvar Chave
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-exclamation-triangle"></i> Confirmar ação
+                </h3>
+                <button class="action-btn" id="closeModalBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja limpar toda a redação? Esta ação não pode ser desfeita.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelBtn">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button class="btn btn-danger" id="confirmBtn">
+                    <i class="fas fa-check"></i> Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Novo Tema -->
+    <div class="modal-overlay" id="newThemeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-plus-circle"></i> Adicionar Novo Tema
+                </h3>
+                <button class="action-btn" id="closeThemeModalBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="newThemeTitle" class="form-label">
+                        <i class="fas fa-heading"></i> Título do Tema
+                    </label>
+                    <input type="text" id="newThemeTitle" class="form-input" placeholder="Digite o título do tema">
+                </div>
+                <div class="form-group">
+                    <label for="newThemeCategory" class="form-label">
+                        <i class="fas fa-tag"></i> Categoria
+                    </label>
+                    <select id="newThemeCategory" class="form-input form-select">
+                        <option value="social">Social</option>
+                        <option value="educacao">Educação</option>
+                        <option value="tecnologia">Tecnologia</option>
+                        <option value="meio-ambiente">Meio Ambiente</option>
+                        <option value="saude">Saúde</option>
+                        <option value="politica">Política</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newThemeExample" class="form-label">
+                        <i class="fas fa-quote-right"></i> Exemplo de Redação
+                    </label>
+                    <textarea id="newThemeExample" class="form-textarea" placeholder="Digite um trecho da redação exemplo" rows="6"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelThemeBtn">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button class="btn btn-primary" id="saveThemeBtn">
+                    <i class="fas fa-save"></i> Salvar Tema
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Template -->
+    <div class="modal-overlay" id="templateModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-file-alt"></i> Escolher Template
+                </h3>
+                <button class="action-btn" id="closeTemplateModalBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="templateType" class="form-label">
+                        <i class="fas fa-tag"></i> Tipo de Template
+                    </label>
+                    <select id="templateType" class="form-input form-select">
+                        <option value="dissertativo-argumentativo">Dissertativo-Argumentativo</option>
+                        <option value="narrativo">Narrativo</option>
+                        <option value="descritivo">Descritivo</option>
+                        <option value="expositivo">Expositivo</option>
+                        <option value="injuncao">Injunção</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="templateTheme" class="form-label">
+                        <i class="fas fa-quote-left"></i> Tema Sugerido
+                    </label>
+                    <input type="text" id="templateTheme" class="form-input" placeholder="Opcional: digite um tema">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-th-list"></i> Modelos Disponíveis
+                    </label>
+                    <div class="grid" style="grid-template-columns: 1fr;">
+                        <div class="item template-item" data-template="enem">
+                            <div class="item-header">
+                                <h4 class="item-title">
+                                    <i class="fas fa-graduation-cap"></i> Modelo ENEM
+                                </h4>
+                            </div>
+                            <p>Estrutura perfeita para redações do ENEM com introdução, desenvolvimento e conclusão com proposta de intervenção.</p>
+                        </div>
+                        <div class="item template-item" data-template="concursos">
+                            <div class="item-header">
+                                <h4 class="item-title">
+                                    <i class="fas fa-file-signature"></i> Modelo Concursos
+                                </h4>
+                            </div>
+                            <p>Formato adequado para concursos públicos com linguagem formal e estrutura rígida.</p>
+                        </div>
+                        <div class="item template-item" data-template="vestibular">
+                            <div class="item-header">
+                                <h4 class="item-title">
+                                    <i class="fas fa-university"></i> Modelo Vestibular
+                                </h4>
+                            </div>
+                            <p>Adaptado para vestibulares tradicionais com abordagem crítica e argumentativa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelTemplateBtn">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button class="btn btn-primary" id="applyTemplateBtn">
+                    <i class="fas fa-check"></i> Aplicar Template
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Ajuda -->
+    <div class="modal-overlay" id="helpModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-question-circle"></i> Ajuda - Como Usar o Corretor
+                </h3>
+                <button class="action-btn" id="closeHelpModalBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="item">
+                    <div class="item-header">
+                        <h4 class="item-title">
+                            <i class="fas fa-key"></i> Configuração da API
+                        </h4>
+                    </div>
+                    <p>Insira sua chave da API Gemini no campo indicado para habilitar a análise automática de redações.</p>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <h4 class="item-title">
+                            <i class="fas fa-search"></i> Análise de Redação
+                        </h4>
+                    </div>
+                    <p>Para analisar sua redação, digite o tema, tipo e texto completo nos campos indicados e clique em "Analisar". O sistema usará IA para avaliar seu texto em 4 competências:</p>
+                    <ul style="margin: 0.75rem 0 0.75rem 1.5rem;">
+                        <li>Estrutura</li>
+                        <li>Coesão</li>
+                        <li>Argumentação</li>
+                        <li>Norma Culta</li>
+                    </ul>
+                </div>
+                
+                <div class="item">
+                    <div class="item-header">
+                        <h4 class="item-title">
+                            <i class="fas fa-lightbulb"></i> Sugestões de Melhoria
+                        </h4>
+                    </div>
+                    <p>Após a análise, clique em "Ver Sugestões" para receber recomendações específicas geradas por IA para melhorar seu texto.</p>
+                </div>
+                
+                <div class="item">
+                    <div class="item-header">
+                        <h4 class="item-title">
+                            <i class="fas fa-database"></i> Banco de Temas
+                        </h4>
+                    </div>
+                    <p>Na aba "Banco de Temas" você encontra exemplos de redações nota 10 para se inspirar e aprender com os melhores modelos.</p>
+                </div>
+                
+                <div class="item">
+                    <div class="item-header">
+                        <h4 class="item-title">
+                            <i class="fas fa-history"></i> Histórico
+                        </h4>
+                    </div>
+                    <p>Todas as suas redações analisadas são salvas no histórico, onde você pode acompanhar seu progresso ao longo do tempo.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="closeHelpBtn">
+                    <i class="fas fa-check"></i> Entendi
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificação -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <div class="notification-content">
+            <div class="notification-title" id="notificationTitle">Sucesso</div>
+            <div class="notification-message" id="notificationMessage">Redação analisada com sucesso!</div>
+        </div>
+        <button class="notification-close" id="closeNotificationBtn">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+<script>
+    // Sample data for themes
+    const sampleThemes = [
+        {
+            id: 1,
+            title: "Desafios da educação inclusiva no Brasil",
+            category: "educacao",
+            example: "\"A educação inclusiva no Brasil enfrenta obstáculos estruturais que vão desde a falta de capacitação dos profissionais até a carência de recursos adaptados. Segundo dados do IBGE, apenas 28% das escolas públicas brasileiras possuem infraestrutura adequada para receber alunos com deficiência. Essa realidade reflete a necessidade urgente de políticas públicas que garantam não apenas o acesso, mas a permanência e o aprendizado efetivo de todos os estudantes.\"",
+            icon: "fa-school",
+            score: 9.8,
+            date: "2023-05-15"
+        },
+        {
+            id: 2,
+            title: "Combate à desinformação na era digital",
+            category: "tecnologia",
+            example: "\"A proliferação de notícias falsas nas redes sociais representsa um desafio contemporâneo que exige ações conjuntas do Estado, das plataformas digitais e da sociedade. Pesquisa do MIT demonstra que notícias falsas se espalham 70% mais rápido que as verdadeiras. Diante desse cenário, torna-se imperativo o desenvolvimento de estratégias educacional que fortaleçam o pensamento crítico dos cidadãos, aliado a mecanismos tecnológicos de verificação de fatos.\"",
+            icon: "fa-globe",
+            score: 9.5,
+            date: "2023-06-22"
+        },
+        {
+            id: 3,
+            title: "Sustentabilidade no consumo de água",
+            category: "meio-ambiente",
+            example: "\"O uso consciente da água é imperativo em um cenário de mudanças climáticas e crescimento populacional. Dados da ONU revelam que até 2030, a demanda por água potável superará a oferta em 40%. Esse cenário demanda não apenas políticas públicas eficientes, mas uma mudança profunda nos hábitos de consumo, com a adoção de tecnologias de reúso e a valorização de práticas sustentáveis no cotidiano.\"",
+            icon: "fa-tint",
+            score: 9.2,
+            date: "2023-04-10"
+        },
+        {
+            id: 4,
+            title: "Impactos da inteligência artificial no mercado de trabalho",
+            category: "tecnologia",
+            example: "\"A revolução tecnológica trazida pela IA promove tanto a extinção de algumas profissões quanto a criação de novas oportunidades. Estudo do Fórum Econômico Mundial prevê que, até 2025, 85 milhões de empregos serão substituídos, enquanto 97 milhões surgirão. Essa transformação exige dos trabalhadores adaptação contínua, com ênfase no desenvolvimento de habilidades criativas e emocionais, áreas in que a máquina ainda não supera o humano.\"",
+            icon: "fa-robot",
+            score: 9.7,
+            date: "2023-07-05"
+        },
+        {
+            id: 5,
+            title: "Democratização do acesso à cultura no Brasil",
+            category: "social",
+            example: "\"A cultura, direito constitucional de todo cidadão, ainda enfrenta barreiras de acesso que perpetuam desigualdades sociais e regionais. Pesquisa do IPEA mostra que 92% dos municípios brasileiros não possuem salas de cinema. Essa realidade evidencia a necessidade de políticas culturais descentralizadas que contemplem a diversidade brasileira e garantam o acesso à produção artística como ferramenta de transformação social.\"",
+            icon: "fa-theater-masks",
+            score: 9.4,
+            date: "2023-03-18"
+        },
+        {
+            id: 6,
+            title: "Violência contra a mulher no século XXI",
+            category: "social",
+            example: "\"Apesar dos avanços legais, a violência de gênero persiste como reflexo de uma estrutura patriarcal arraigada. Dados do Fórum Brasileiro de Segurança Pública registram um feminicídio a cada 7 horas no país. Esse cenário exige não apenas punição eficiente aos agressores, mas educação desde a base escolar para desconstruir estereótipos e promover relações de gênero igualitárias.\"",
+            icon: "fa-female",
+            score: 9.9,
+            date: "2023-08-30"
+        }
+    ];
+
+    const feedbackTemplates = {
+        estrutura: {
+            title: "Estrutura",
+            icon: "fa-layer-group",
+            color: "estrutura",
+            description: "Avalia a organização do texto, incluindo introdução, desenvolvimento e conclusão"
+        },
+        coesao: {
+            title: "Coesão",
+            icon: "fa-link",
+            color: "coesao",
+            description: "Avalia os elementos que garantis a ligação entre as partes do texto"
+        },
+        argumentacao: {
+            title: "Argumentação",
+            icon: "fa-comments",
+            color: "argumentacao",
+            description: "Avalia a qualidade e fundamentação dos argumentos apresentados"
+        },
+        norma: {
+            title: "Norma Culta",
+            icon: "fa-pen-fancy",
+            color: "norma",
+            description: "Avalia o domínio da norma padrão da língua portuguesa"
+        }
+    };
+
+    const essayTemplates = {
+        "enem": {
+            theme: "Desafios da educação inclusiva no Brasil",
+            text: `[Introdução]
+Nos últimos anos, a educação inclusiva no Brasil tem se tornado pauta de discussões cada vez mais relevantes. Apesar dos avanços legislativos, como a Lei Brasileira de Inclusão (2015), a efetivação do direito à educação para pessoas com deficiência ainda enfrenta obstáculos significativos. Nesse contexto, percebe-se que a falta de infraestrutura adequada e a escassez de profissionais qualificados configuram-se como desafios central a serem superados.
+
+[Desenvolvimento 1]
+Em primeiro plano, é notória a carência de infraestrutura física adaptada nas escolas brasileiras. Segundo dados do Instituto Nacional de Estudos e Pesquisas Educacionais (INEP), apenas 28% das escolas públicas possuem dependências acessíveis para alunos com mobilidade reduzida. Essa realidade exclui milhares de estudantes do sistema educacional, violando o princípio constitucional da igualdade de oportunidades. Portanto, fica evidente a necessidade de investimentos maciços em adaptações estruturais.
+
+[Desenvolvimento 2]
+Além disso, a formação deficiente dos educadores agrava o problema. Pesquisa realizada pela Universidade de São Paulo (USP) revela que 65% dos professores não se sentem preparados para lidar com a diversidade em sala de aula. Essa deficiência na capacitação profissional resulta em práticas pedagógicas inadequadas, que não atendem às necessidades específicas dos alunos com deficiência. Desse modo, torna-se imperativo a implementação de programas contínuos de formação docente.
+
+[Conclusão]
+Diante dos fatos apresentados, medidas são urgentes para garantir a efetiva inclusão educacional. Cabe ao Ministério da Educação, em parceria com estados e municípios, criar o Programa Nacional de Acessibilidade Educacional, que deverá destinar verbas específicas para adaptações físicas nas escolas e oferecer formação continuada aos professores. Ademais, é fundamental que a sociedade civil acompanhe a execução dessas políticas por meio de conselhos municipais de educação. Somente assim será possível construir um sistema educacional verdadeiramente inclusivo, conforme previsto na legislação brasileira.`
+        },
+        "concursos": {
+            theme: "A importância do serviço público de qualidade",
+            text: `[Introdução]
+O serviço público constitui pilar fundamental para o desenvolvimento nacional e a garantia dos direitos sociais. Em um contexto de crescentes demandas da população e limitações orçamentárias, a busca por eficiência na administração pública torna-se imperativa. Nesse sentido, a valorização dos servidores e a modernização dos processos configuram-se como estratégias essenciais para a oferta de serviços com excelência.
+
+[Desenvolvimento 1]
+Primordialmente, a valorização dos servidores públicos revela-se como fator determinante para a qualidade dos serviços. Dados do Instituto de Pesquisa Econômica Aplicada (IPEA) demonstram que estados que investem em capacitação e remuneração adequada apresentam índices de satisfação 40% superiores. O servidor motivado e preparado técnicamente torna-se agente transformador, capaz de inovar e melhorar continuamente os processos sob sua responsabilidade.
+
+[Desenvolvimento 2]
+Outrossim, a modernização tecnológica das instituições públicas é medida que se impõe na contemporaneidade. A pandemia de COVID-19 evidenciou a urgência de digitalização de serviços, com a adoção de plataformas integradas e processos desburocratizados. Experiências bem-sucedidas, como o programa "Gov.br", comprovam que a tecnologia pode ampliar o acesso, reduzir custos e aumentar a transparência, beneficiando tanto os cidadãos quanto a própria administração.
+
+[Conclusão]
+Em face do exposto, conclui-se que a excelência do serviço público depende de investimentos contínuos em seu capital humano e infraestrutura tecnológica. Recomenda-se a ampliação dos programas de capacitação de servidores, em ênfase em gestão e inovação, aliada à aceleração dos processos de transformação digital. Tais medidas, implementadas de forma integrada e com monitoramento constante de resultados, certamente elevarão a qualidade dos serviços prestados à população, fortalecendo a democracia e a cidadania.`
+        },
+        "vestibular": {
+            theme: "Os desafios da mobilidade urbana nas grandes cidades",
+            text: `[Introdução]
+O caos no trânsito das metrópoles brasileiras configura-se como um dos mais graves problemas urbanos da atualidade. Congestionamentos intermináveis, transporte público deficiente e poluição atmosférica são sintomas de um modelo de mobilidade insustentável, que prioriza o veículo individual em detrimento do coletivo. Essa realidade exige análise crítica e proposição de soluções inovadoras que contemplem a complexidade do tema.
+
+[Desenvolvimento 1]
+O modelo rodoviarista, herança do século XX, demonstra-se incompatível com as demandas contemporâneas. São Paulo, por exemplo, possui apenas 104 km de metrô para atender uma região metropolitana com mais de 22 milhões de habitantes. Em contraste, cidades como Berlim, com população similar, dispõem de rede metroviária quatro vezes maior. Essa disparidade evidencia o atraso brasileiro no planejamento de transportes coletivos de massa, única solução viável para reduzir a dependência do automóvel particular.
+
+[Desenvolvimento 2]
+Paralelamente, o crescimento desordenado das cidades agrava o problema. A expansão urbana para periferias distantes, sem a devida infraestrutura de transportes, obriga milhares de trabalhadores a deslocamentos diários extenuantes. Pesquisa da Fundação Getúlio Vargas revela que o paulistano gasta em média 2h43 por dia no trânsito, tempo que poderia ser dedicado ao lazer, estudo ou convívio familial. Esse cenário demanda políticas urbanísticas que promovam a ocupação mais densa e mista dos centros urbanos.
+
+[Conclusão]
+Diante dessa análise, fica claro que a superação dos desafios da mobilidade urbana exige ruptura com o paradigma atual. É premente a necessidade de investimentos maciços em transporte público de qualidade, integrado a políticas de uso do solo que reduzam as distâncias a percorrer. Somente com essa abordagem sistêmica será possível construir cidades mais humanas, sustentáveis e eficientes, onde o direito à mobilidade seja garantido a todos os cidadãos.`
+        }
+    };
+
+    // DOM Elements
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const apiKeyInput = document.getElementById('apiKey');
+    const essayText = document.getElementById('essayText');
+    const essayTheme = document.getElementById('essayTheme');
+    const essayType = document.getElementById('essayType');
+    const essayTypeTrigger = document.getElementById('essayTypeTrigger');
+    const selectedEssayType = document.getElementById('selectedEssayType');
+    const essayTypeModal = document.getElementById('essayTypeModal');
+    const charCounter = document.getElementById('charCounter');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const saveEssayBtn = document.getElementById('saveEssayBtn');
+    const improveBtn = document.getElementById('improveBtn');
+    const suggestionsBtn = document.getElementById('suggestionsBtn');
+    const confirmModal = document.getElementById('confirmModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const feedbackResults = document.getElementById('feedbackResults');
+    const correctionResult = document.getElementById('correctionResult');
+    const suggestionsContainer = document.getElementById('suggestionsContainer');
+    const suggestionsContent = document.getElementById('suggestionsContent');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const finalScore = document.getElementById('finalScore');
+    const themesGrid = document.getElementById('themesGrid');
+    const searchThemes = document.getElementById('searchThemes');
+    const searchBtn = document.getElementById('searchBtn');
+    const filterCategory = document.getElementById('filterCategory');
+    const filterBtn = document.getElementById('filterBtn');
+    const newThemeBtn = document.getElementById('newThemeBtn');
+    const newThemeModal = document.getElementById('newThemeModal');
+    const closeThemeModalBtn = document.getElementById('closeThemeModalBtn');
+    const cancelThemeBtn = document.getElementById('cancelThemeBtn');
+    const saveThemeBtn = document.getElementById('saveThemeBtn');
+    const newThemeTitle = document.getElementById('newThemeTitle');
+    const newThemeCategory = document.getElementById('newThemeCategory');
+    const newThemeExample = document.getElementById('newThemeExample');
+    const templateBtn = document.getElementById('templateBtn');
+    const templateModal = document.getElementById('templateModal');
+    const closeTemplateModalBtn = document.getElementById('closeTemplateModalBtn');
+    const cancelTemplateBtn = document.getElementById('cancelTemplateBtn');
+    const applyTemplateBtn = document.getElementById('applyTemplateBtn');
+    const templateType = document.getElementById('templateType');
+    const templateTheme = document.getElementById('templateTheme');
+    const helpBtn = document.getElementById('helpBtn');
+    const helpModal = document.getElementById('helpModal');
+    const closeHelpModalBtn = document.getElementById('closeHelpModalBtn');
+    const closeHelpBtn = document.getElementById('closeHelpBtn');
+    const createNewEssayBtn = document.getElementById('createNewEssayBtn');
+    const refreshHistoryBtn = document.getElementById('refreshHistoryBtn');
+    const filterHistory = document.getElementById('filterHistory');
+    const historyContent = document.getElementById('historyContent');
+    const statsPeriod = document.getElementById('statsPeriod');
+    const statsContent = document.getElementById('statsContent');
+    const notification = document.getElementById('notification');
+    const notificationTitle = document.getElementById('notificationTitle');
+    const notificationMessage = document.getElementById('notificationMessage');
+    const closeNotificationBtn = document.getElementById('closeNotificationBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const apiConfigBtn = document.getElementById('apiConfigBtn');
+    const apiConfigModal = document.getElementById('apiConfigModal');
+    const closeApiConfigModalBtn = document.getElementById('closeApiConfigModalBtn');
+    const cancelApiConfigBtn = document.getElementById('cancelApiConfigBtn');
+    const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
+
+    // Radar chart instance
+    let radarChart = null;
+
+    // Initialize the app
+    function init() {
+        // Set up event listeners
+        setupEventListeners();
+        
+        // Load sample themes
+        loadThemes();
+        
+        // Update character counter
+        updateCharCounter();
+        
+        // Check for saved essay
+        checkSavedEssay();
+        
+        // Load saved API key
+        loadApiKey();
+    }
+
+    // Set up all event listeners
+    function setupEventListeners() {
+        // Tab switching
+        tabs.forEach(tab => {
+            tab.addEventListener('click', switchTab);
+        });
+        
+        // Character counter for essay text
+        essayText.addEventListener('input', updateCharCounter);
+        
+        // Custom select for essay type
+        essayTypeTrigger.addEventListener('click', () => {
+            essayTypeModal.classList.toggle('active');
+        });
+        
+        document.querySelectorAll('#essayTypeModal .custom-select-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const value = option.getAttribute('data-value');
+                const text = option.querySelector('div > div').textContent;
+                
+                essayType.value = value;
+                selectedEssayType.textContent = text;
+                
+                document.querySelectorAll('#essayTypeModal .custom-select-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                option.classList.add('active');
+                
+                essayTypeModal.classList.remove('active');
+            });
+        });
+        
+        // Close custom select when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!essayTypeTrigger.contains(e.target) && !essayTypeModal.contains(e.target)) {
+                essayTypeModal.classList.remove('active');
+            }
+        });
+        
+        // Analyze button
+        analyzeBtn.addEventListener('click', analyzeEssay);
+        
+        // Clear button and modal
+        clearBtn.addEventListener('click', () => {
+            confirmModal.classList.add('active');
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            confirmModal.classList.remove('active');
+        });
+        
+        cancelBtn.addEventListener('click', () => {
+            confirmModal.classList.remove('active');
+        });
+        
+        confirmBtn.addEventListener('click', clearEssay);
+        
+        // Save essay button
+        saveEssayBtn.addEventListener('click', saveEssay);
+        
+        // Improve essay button
+        improveBtn.addEventListener('click', improveEssay);
+        
+        // Suggestions button
+        suggestionsBtn.addEventListener('click', toggleSuggestions);
+        
+        // New theme modal
+        newThemeBtn.addEventListener('click', () => {
+            newThemeModal.classList.add('active');
+        });
+        
+        closeThemeModalBtn.addEventListener('click', () => {
+            newThemeModal.classList.remove('active');
+        });
+        
+        cancelThemeBtn.addEventListener('click', () => {
+            newThemeModal.classList.remove('active');
+        });
+        
+        saveThemeBtn.addEventListener('click', saveNewTheme);
+        
+        // Search and filter themes
+        searchBtn.addEventListener('click', searchThemesList);
+        searchThemes.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchThemesList();
+        });
+        filterBtn.addEventListener('click', filterThemesList);
+        
+        // Template modal
+        templateBtn.addEventListener('click', () => {
+            templateModal.classList.add('active');
+        });
+        
+        closeTemplateModalBtn.addEventListener('click', () => {
+            templateModal.classList.remove('active');
+        });
+        
+        cancelTemplateBtn.addEventListener('click', () => {
+            templateModal.classList.remove('active');
+        });
+        
+        applyTemplateBtn.addEventListener('click', applyTemplate);
+        
+        // Help modal
+        helpBtn.addEventListener('click', () => {
+            helpModal.classList.add('active');
+        });
+        
+        closeHelpModalBtn.addEventListener('click', () => {
+            helpModal.classList.remove('active');
+        });
+        
+        closeHelpBtn.addEventListener('click', () => {
+            helpModal.classList.remove('active');
+        });
+        
+        // Create new essay button
+        createNewEssayBtn.addEventListener('click', () => {
+            document.querySelector('.tab[data-tab="correcao"]').click();
+        });
+        
+        // Refresh history button
+        refreshHistoryBtn.addEventListener('click', refreshHistory);
+        
+        // Filter history
+        filterHistory.addEventListener('change', refreshHistory);
+        
+        // Stats period change
+        statsPeriod.addEventListener('change', loadStats);
+        
+        // Close notification
+        closeNotificationBtn.addEventListener('click', () => {
+            notification.classList.remove('show');
+        });
+        
+        // Export button
+        exportBtn.addEventListener('click', exportEssay);
+        
+        // API Configuration
+        apiConfigBtn.addEventListener('click', () => {
+            apiConfigModal.classList.add('active');
+            apiKeyInput.value = localStorage.getItem('geminiApiKey') || '';
+        });
+        
+        closeApiConfigModalBtn.addEventListener('click', () => {
+            apiConfigModal.classList.remove('active');
+        });
+        
+        cancelApiConfigBtn.addEventListener('click', () => {
+            apiConfigModal.classList.remove('active');
+        });
+        
+        saveApiKeyBtn.addEventListener('click', saveApiKey);
+    }
+
+    // Load API key from localStorage
+    function loadApiKey() {
+        const savedApiKey = localStorage.getItem('geminiApiKey');
+        if (savedApiKey) {
+            // API key is stored but not shown in the main interface for security
+            console.log('API key loaded from storage');
+        }
+    }
+
+    // Save API key to localStorage
+    function saveApiKey() {
+        const apiKey = apiKeyInput.value.trim();
+        if (apiKey) {
+            localStorage.setItem('geminiApiKey', apiKey);
+            apiConfigModal.classList.remove('active');
+            showNotification('Sucesso', 'Chave da API salva com sucesso!', 'success');
+        } else {
+            showNotification('Erro', 'Por favor, insira uma chave da API válida.', 'error');
+        }
+    }
+
+    // Switch between tabs
+    function switchTab(e) {
+        tabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        const tab = e.currentTarget;
+        tab.classList.add('active');
+        const tabId = tab.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+        
+        if (tabId === 'historico') {
+            refreshHistory();
+        } else if (tabId === 'estatisticas') {
+            loadStats();
+        }
+    }
+
+    // Update character counter
+    function updateCharCounter() {
+        const count = essayText.value.length;
+        const max = 1000;
+        charCounter.textContent = `${count}/${max}`;
+        
+        if (count > max * 0.9) {
+            charCounter.style.color = 'var(--danger)';
+        } else if (count > max * 0.75) {
+            charCounter.style.color = 'var(--warning)';
+        } else {
+            charCounter.style.color = 'var(--gray)';
+        }
+    }
+
+    // Função para calcular a nota final - CORRIGIDA
+    function calculateFinalScore(scores) {
+        const weights = {
+            estrutura: 0.3,
+            coesao: 0.25,
+            argumentacao: 0.3,
+            norma: 0.15
+        };
+        
+        // Calcular a nota sem multiplicar por 10
+        const rawScore = (
+            scores.estrutura * weights.estrutura +
+            scores.coesao * weights.coesao +
+            scores.argumentacao * weights.argumentacao +
+            scores.norma * weights.norma
+        );
+        
+        // Garantir que a nota não ultrapasse 10.0 e retornar como número
+        return Math.min(rawScore, 10.0);
+    }
+
+    // Função para renderizar o feedback
+    function renderFeedback(feedback, scores) {
+        feedbackResults.innerHTML = '';
+        
+        const feedbackTemplates = {
+            estrutura: {
+                title: "Estrutura",
+                icon: "fa-layer-group",
+                color: "estrutura",
+                description: "Avalia a organização do texto, incluindo introdução, desenvolvimento e conclusão"
+            },
+            coesao: {
+                title: "Coesão",
+                icon: "fa-link",
+                color: "coesao",
+                description: "Avalia os elementos que garantem a ligação entre as partes do texto"
+            },
+            argumentacao: {
+                title: "Argumentação",
+                icon: "fa-comments",
+                color: "argumentacao",
+                description: "Avalia a qualidade e fundamentação dos argumentos apresentados"
+            },
+            norma: {
+                title: "Norma Culta",
+                icon: "fa-pen-fancy",
+                color: "norma",
+                description: "Avalia o domínio da norma padrão da língua portuguesa"
+            }
+        };
+        
+        Object.keys(feedbackTemplates).forEach(key => {
+            const template = feedbackTemplates[key];
+            const score = scores[key];
+            const scoreClass = score >= 8 ? 'score-high' : score >= 6 ? 'score-medium' : 'score-low';
+
+            const feedbackSection = document.createElement('div');
+            feedbackSection.className = 'feedback-section';
+            feedbackSection.innerHTML = `
+                <div class="feedback-header">
+                    <div class="feedback-icon ${template.color}">
+                        <i class="fas ${template.icon}"></i>
+                    </div>
+                    <div class="feedback-title">
+                        ${template.title}
+                        <span class="score ${scoreClass}">
+                            <i class="fas fa-star"></i> ${score.toFixed(1)}/10
+                        </span>
+                    </div>
+                </div>
+                <div class="feedback-content">
+                    <p>${template.description}</p>
+                    <ul class="feedback-list">
+                        ${feedback[key].map(item => `
+                            <li>
+                                <i class="fas fa-circle feedback-item-icon"></i>
+                                <span class="feedback-item-text">${item}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+            feedbackResults.appendChild(feedbackSection);
+        });
+    }
+
+    // Função para atualizar o gráfico radar
+    function updateRadarChart(scores) {
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        
+        // Destruir gráfico existente se houver
+        if (window.radarChartInstance) {
+            window.radarChartInstance.destroy();
+        }
+
+        window.radarChartInstance = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Estrutura', 'Coesão', 'Argumentação', 'Norma Culta'],
+                datasets: [{
+                    label: 'Desempenho',
+                    data: [
+                        scores.estrutura,
+                        scores.coesao,
+                        scores.argumentacao,
+                        scores.norma
+                    ],
+                    backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                    borderColor: 'var(--primary)',
+                    pointBackgroundColor: 'var(--primary)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        min: 0,
+                        ticks: {
+                            stepSize: 2
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+
+    // Analyze essay with Gemini API - FUNÇÃO CORRIGIDA
+    async function analyzeEssay() {
+        const text = essayText.value.trim();
+        const theme = essayTheme.value.trim();
+        const type = essayType.value;
+        const apiKey = localStorage.getItem('geminiApiKey');
+
+        if (!apiKey) {
+            showNotification('Erro', 'Por favor, configure sua chave da API Gemini primeiro.', 'error');
+            apiConfigBtn.click();
+            return;
+        }
+
+        if (!theme) {
+            showNotification('Atenção', 'Por favor, informe o tema da redação.', 'warning');
+            essayTheme.focus();
+            return;
+        }
+
+        if (!text) {
+            showNotification('Atenção', 'Por favor, digite sua redação antes de analisar.', 'warning');
+            essayText.focus();
+            return;
+        }
+
+        if (text.length < 300) {
+            showNotification('Atenção', 'O texto deve ter pelo menos 300 caracteres para análise.', 'warning');
+            essayText.focus();
+            return;
+        }
+
+        // Show progress bar
+        progressContainer.style.display = 'block';
+        progressBar.style.width = '0%';
+        analyzeBtn.disabled = true;
+        analyzeBtn.innerHTML = '<span class="loading"></span> Analisando...';
+
+        try {
+            // Simulate progress
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = `${progress}%`;
+                if (progress >= 80) clearInterval(progressInterval);
+            }, 300);
+
+            // Gemini API call - CORRIGIDO: usando o endpoint e headers corretos
+            const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-goog-api-key': apiKey
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: `Você é um corretor especializado em redações do ENEM e vestibulares. 
+                            Analise a seguinte redação com tema "${theme}" e do tipo ${type}:
+
+                            "${text}"
+
+                            Forneça uma análise detalhada em formato JSON com as seguintes informações EXATAMENTE:
+                            {
+                                "scores": {
+                                    "estrutura": número de 0 a 10,
+                                    "coesao": número de 0 a 10,
+                                    "argumentacao": número de 0 a 10,
+                                    "norma": número de 0 a 10
+                                },
+                                "feedback": {
+                                    "estrutura": ["item 1", "item 2", "item 3"],
+                                    "coesao": ["item 1", "item 2", "item 3"],
+                                    "argumentacao": ["item 1", "item 2", "item 3"],
+                                    "norma": ["item 1", "item 2", "item 3"]
+                                },
+                                "suggestions": [
+                                    {
+                                        "title": "Título da sugestão",
+                                        "problem": "Descrição do problema",
+                                        "original": "Texto original",
+                                        "improved": "Texto melhorado"
+                                    }
+                                ]
+                            }`
+                        }]
+                    }],
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 2048,
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error?.message || `Erro na API: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            clearInterval(progressInterval);
+            progressBar.style.width = '100%';
+
+            // Extract JSON from response
+            const responseText = data.candidates[0].content.parts[0].text;
+            const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+            
+            if (!jsonMatch) {
+                throw new Error('Não foi possível extrair JSON válido da resposta da API.');
+            }
+            
+            const result = JSON.parse(jsonMatch[0]);
+            const { scores, feedback, suggestions } = result;
+            const finalScoreValue = calculateFinalScore(scores);
+
+            // Update UI with results
+            finalScore.textContent = finalScoreValue.toFixed(1);
+            correctionResult.style.display = 'block';
+            renderFeedback(feedback, scores);
+            updateRadarChart(scores);
+
+            // Store suggestions for later use
+            window.currentSuggestions = suggestions;
+
+            // Reset progress bar after 1 second
+            setTimeout(() => {
+                progressContainer.style.display = 'none';
+                progressBar.style.width = '0%';
+            }, 1000);
+
+            showNotification('Sucesso', 'Redação analisada com sucesso!', 'success');
+        } catch (error) {
+            console.error('Erro ao analisar redação:', error);
+            showNotification('Erro', `Falha ao analisar a redação: ${error.message}`, 'error');
+            progressContainer.style.display = 'none';
+            progressBar.style.width = '0%';
+        } finally {
+            analyzeBtn.disabled = false;
+            analyzeBtn.innerHTML = '<i class="fas fa-search"></i> Analisar';
+        }
+    }
+
+    // Toggle suggestions visibility
+    function toggleSuggestions() {
+        suggestionsContainer.style.display = suggestionsContainer.style.display === 'none' ? 'block' : 'none';
+        
+        // If showing suggestions and they haven't been loaded yet, load them
+        if (suggestionsContainer.style.display === 'block' && window.currentSuggestions) {
+            suggestionsContent.innerHTML = '';
+            window.currentSuggestions.forEach(suggestion => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.className = 'suggestion-item';
+                suggestionItem.innerHTML = `
+                    <div class="suggestion-header">
+                        <i class="fas fa-lightbulb suggestion-icon"></i>
+                        <div class="suggestion-title">${suggestion.title}</div>
+                    </div>
+                    <div class="suggestion-content">
+                        <p><strong>Problema:</strong> ${suggestion.problem}</p>
+                        <div class="suggestion-original">"${suggestion.original}"</div>
+                        <div class="suggestion-improved">"${suggestion.improved}"</div>
+                        <div class="suggestion-actions">
+                            <button class="btn btn-sm btn-primary apply-suggestion-btn" data-improved="${suggestion.improved}">
+                                <i class="fas fa-check"></i> Aplicar
+                            </button>
+                            <button class="btn btn-sm btn-outline copy-suggestion-btn" data-text="${suggestion.improved}">
+                                <i class="fas fa-copy"></i> Copiar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                suggestionsContent.appendChild(suggestionItem);
+            });
+
+            // Add event listeners for suggestion buttons
+            document.querySelectorAll('.apply-suggestion-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const improvedText = btn.getAttribute('data-improved');
+                    const originalText = btn.closest('.suggestion-item').querySelector('.suggestion-original').textContent.trim().replace(/^"/, '').replace(/"$/, '');
+                    
+                    if (essayText.value.includes(originalText)) {
+                        essayText.value = essayText.value.replace(originalText, improvedText);
+                    } else {
+                        essayText.value += `\n\n${improvedText}`;
+                    }
+                    
+                    updateCharCounter();
+                    showNotification('Sucesso', 'Sugestão aplicada ao texto!', 'success');
+                });
+            });
+
+            document.querySelectorAll('.copy-suggestion-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const text = btn.getAttribute('data-text');
+                    navigator.clipboard.writeText(text).then(() => {
+                        showNotification('Sucesso', 'Sugestão copiada para a área de transferência!', 'success');
+                    });
+                });
+            });
+        }
+    }
+
+    // Clear essay with confirmation
+    function clearEssay() {
+        essayText.value = '';
+        essayTheme.value = '';
+        essayType.value = 'dissertativo-argumentativo';
+        selectedEssayType.textContent = 'Dissertativo-Argumentativo';
+        document.querySelectorAll('#essayTypeModal .custom-select-option').forEach(opt => {
+            opt.classList.remove('active');
+        });
+        document.querySelector('#essayTypeModal .custom-select-option[data-value="dissertativo-argumentativo"]').classList.add('active');
+        
+        correctionResult.style.display = 'none';
+        suggestionsContainer.style.display = 'none';
+        feedbackResults.innerHTML = '';
+        updateCharCounter();
+        confirmModal.classList.remove('active');
+        showNotification('Sucesso', 'Redação limpa com sucesso!', 'success');
+    }
+
+    // Save essay to history
+    function saveEssay() {
+        const essay = {
+            id: Date.now(),
+            theme: essayTheme.value,
+            type: essayType.value,
+            text: essayText.value,
+            score: parseFloat(finalScore.textContent),
+            date: new Date().toISOString().split('T')[0]
+        };
+
+        let history = JSON.parse(localStorage.getItem('essayHistory') || '[]');
+        history.push(essay);
+        localStorage.setItem('essayHistory', JSON.stringify(history));
+        showNotification('Sucesso', 'Redação salva no histórico!', 'success');
+    }
+
+    // Check for saved essay
+    function checkSavedEssay() {
+        const lastEssay = JSON.parse(localStorage.getItem('lastEssay') || '{}');
+        if (lastEssay.text) {
+            essayText.value = lastEssay.text;
+            essayTheme.value = lastEssay.theme || '';
+            essayType.value = lastEssay.type || 'dissertativo-argumentativo';
+            selectedEssayType.textContent = document.querySelector(`#essayTypeModal .custom-select-option[data-value="${lastEssay.type || 'dissertativo-argumentativo'}"] div > div`).textContent;
+            updateCharCounter();
+        }
+    }
+
+    // Save current essay to local storage
+    function saveCurrentEssay() {
+        const essay = {
+            text: essayText.value,
+            theme: essayTheme.value,
+            type: essayType.value
+        };
+        localStorage.setItem('lastEssay', JSON.stringify(essay));
+    }
+
+    // Load themes to the grid
+    function loadThemes(category = 'all', search = '') {
+        themesGrid.innerHTML = '';
+        let filteredThemes = sampleThemes;
+
+        if (category !== 'all') {
+            filteredThemes = filteredThemes.filter(theme => theme.category === category);
+        }
+
+        if (search) {
+            filteredThemes = filteredThemes.filter(theme =>
+                theme.title.toLowerCase().includes(search.toLowerCase()) ||
+                theme.example.toLowerCase().includes(search.toLowerCase())
+            );
+        }
+
+        if (filteredThemes.length === 0) {
+            themesGrid.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-folder-open"></i>
+                    <h4>Nenhum tema encontrado</h4>
+                    <p>Tente ajustar os filtros ou adicione um novo tema.</p>
+                    <button class="btn btn-primary" id="addNewThemeBtn">
+                        <i class="fas fa-plus"></i> Adicionar Tema
+                    </button>
+                </div>
+            `;
+            document.getElementById('addNewThemeBtn').addEventListener('click', () => {
+                newThemeModal.classList.add('active');
+            });
+            return;
+        }
+
+        filteredThemes.forEach(theme => {
+            const themeItem = document.createElement('div');
+            themeItem.className = 'theme-item';
+            themeItem.innerHTML = `
+                <div class="theme-title">
+                    <i class="fas ${theme.icon}"></i>
+                    ${theme.title}
+                    <span class="score score-high">
+                        <i class="fas fa-star"></i> ${theme.score}/10
+                    </span>
+                </div>
+                <div class="theme-example">"${theme.example}"</div>
+                <a href="#" class="theme-link apply-theme-btn" data-theme-id="${theme.id}">
+                    <i class="fas fa-arrow-right"></i> Usar este tema
+                </a>
+            `;
+            themesGrid.appendChild(themeItem);
+        });
+
+        document.querySelectorAll('.apply-theme-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const themeId = btn.getAttribute('data-theme-id');
+                const theme = sampleThemes.find(t => t.id == themeId);
+                essayTheme.value = theme.title;
+                essayText.value = theme.example;
+                updateCharCounter();
+                document.querySelector('.tab[data-tab="correcao"]').click();
+                showNotification('Sucesso', 'Tema aplicado com sucesso!', 'success');
+            });
+        });
+    }
+
+    // Search themes
+    function searchThemesList() {
+        const search = searchThemes.value.trim();
+        const category = filterCategory.value;
+        loadThemes(category, search);
+    }
+
+    // Filter themes
+    function filterThemesList() {
+        const category = filterCategory.value;
+        const search = searchThemes.value.trim();
+        loadThemes(category, search);
+    }
+
+    // Save new theme
+    function saveNewTheme() {
+        const title = newThemeTitle.value.trim();
+        const category = newThemeCategory.value;
+        const example = newThemeExample.value.trim();
+
+        if (!title || !example) {
+            showNotification('Atenção', 'Por favor, preencha todos os campos.', 'warning');
+            return;
+        }
+
+        const newTheme = {
+            id: Date.now(),
+            title,
+            category,
+            example,
+            icon: 'fa-book',
+            score: 9.0,
+            date: new Date().toISOString().split('T')[0]
+        };
+
+        sampleThemes.push(newTheme);
+        newThemeModal.classList.remove('active');
+        newThemeTitle.value = '';
+        newThemeCategory.value = 'social';
+        newThemeExample.value = '';
+        loadThemes();
+        showNotification('Sucesso', 'Novo tema adicionado com sucesso!', 'success');
+    }
+
+    // Apply template
+    function applyTemplate() {
+        const template = document.querySelector('.template-item.active');
+        if (!template) {
+            showNotification('Atenção', 'Selecione um modelo antes de aplicar.', 'warning');
+            return;
+        }
+
+        const templateId = template.getAttribute('data-template');
+        const templateData = essayTemplates[templateId];
+        essayTheme.value = templateTheme.value || templateData.theme;
+        essayType.value = templateType.value;
+        selectedEssayType.textContent = document.querySelector(`#essayTypeModal .custom-select-option[data-value="${templateType.value}"] div > div`).textContent;
+        essayText.value = templateData.text;
+        updateCharCounter();
+        templateModal.classList.remove('active');
+        showNotification('Sucesso', 'Template aplicado com sucesso!', 'success');
+    }
+
+    // Template selection
+    document.querySelectorAll('.template-item').forEach(item => {
+        item.addEventListener('click', () => {
+            document.querySelectorAll('.template-item').forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+        });
+    });
+
+    // Refresh history
+    function refreshHistory() {
+        const filter = filterHistory.value;
+        let history = JSON.parse(localStorage.getItem('essayHistory') || '[]');
+
+        if (filter === 'last-week') {
+            const lastWeek = new Date();
+            lastWeek.setDate(lastWeek.getDate() - 7);
+            history = history.filter(essay => new Date(essay.date) >= lastWeek);
+        } else if (filter === 'last-month') {
+            const lastMonth = new Date();
+            lastMonth.setMonth(lastMonth.getMonth() - 1);
+            history = history.filter(essay => new Date(essay.date) >= lastMonth);
+        } else if (filter === 'high-scores') {
+            history = history.filter(essay => essay.score >= 8);
+        } else if (filter === 'low-scores') {
+            history = history.filter(essay => essay.score < 6);
+        }
+
+        historyContent.innerHTML = '';
+        if (history.length === 0) {
+            historyContent.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-clock"></i>
+                    <h4>Nenhuma redação encontrada no histórico</h4>
+                    <p>Suas redações analisadas aparecerão aqui para consulta futura</p>
+                    <button class="btn btn-primary" id="createNewEssayBtn">
+                        <i class="fas fa-plus"></i> Criar nova redação
+                    </button>
+                </div>
+            `;
+            document.getElementById('createNewEssayBtn').addEventListener('click', () => {
+                document.querySelector('.tab[data-tab="correcao"]').click();
+            });
+            return;
+        }
+
+        history.forEach(essay => {
+            const historyItem = document.createElement('div');
+            historyItem.className = 'item';
+            const scoreClass = essay.score >= 8 ? 'score-high' : essay.score >= 6 ? 'score-medium' : 'score-low';
+            historyItem.innerHTML = `
+                <div class="item-header">
+                    <div class="item-title">
+                        <i class="fas fa-file-alt"></i>
+                        ${essay.theme || 'Sem título'}
+                        <span class="score ${scoreClass}">
+                            <i class="fas fa-star"></i> ${essay.score.toFixed(1)}/10
+                        </span>
+                    </div>
+                    <div class="item-actions">
+                        <button class="action-btn view-essay-btn" data-id="${essay.id}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn delete-essay-btn" data-id="${essay.id}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="item-content">
+                    <p><strong>Tipo:</strong> ${essay.type}</p>
+                    <p><strong>Data:</strong> ${essay.date}</p>
+                    <p>"${essay.text.substring(0, 100)}..."</p>
+                </div>
+            `;
+            historyContent.appendChild(historyItem);
+        });
+
+        document.querySelectorAll('.view-essay-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                const essay = history.find(e => e.id == id);
+                essayText.value = essay.text;
+                essayTheme.value = essay.theme;
+                essayType.value = essay.type;
+                selectedEssayType.textContent = document.querySelector(`#essayTypeModal .custom-select-option[data-value="${essay.type}"] div > div`).textContent;
+                updateCharCounter();
+                document.querySelector('.tab[data-tab="correcao"]').click();
+                showNotification('Sucesso', 'Redação carregada do histórico!', 'success');
+            });
+        });
+
+        document.querySelectorAll('.delete-essay-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                history = history.filter(e => e.id != id);
+                localStorage.setItem('essayHistory', JSON.stringify(history));
+                refreshHistory();
+                showNotification('Sucesso', 'Redação removida do histórico!', 'success');
+            });
+        });
+    }
+
+    // Load statistics
+    function loadStats() {
+        const period = statsPeriod.value;
+        const history = JSON.parse(localStorage.getItem('essayHistory') || '[]');
+        let filteredHistory = history;
+
+        if (period === 'last-month') {
+            const lastMonth = new Date();
+            lastMonth.setMonth(lastMonth.getMonth() - 1);
+            filteredHistory = history.filter(essay => new Date(essay.date) >= lastMonth);
+        } else if (period === 'last-3months') {
+            const last3Months = new Date();
+            last3Months.setMonth(last3Months.getMonth() - 3);
+            filteredHistory = history.filter(essay => new Date(essay.date) >= last3Months);
+        } else if (period === 'last-6months') {
+            const last6Months = new Date();
+            last6Months.setMonth(last6Months.getMonth() - 6);
+            filteredHistory = history.filter(essay => new Date(essay.date) >= last6Months);
+        }
+
+        if (filteredHistory.length === 0) {
+            statsContent.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-chart-bar"></i>
+                    <h4>Dados estatísticos não disponíveis</h4>
+                    <p>Analise algumas redações para gerar estatísticas de desempenho</p>
+                </div>
+            `;
+            return;
+        }
+
+        const averageScore = filteredHistory.reduce((sum, essay) => sum + essay.score, 0) / filteredHistory.length;
+        const essayCount = filteredHistory.length;
+        const types = {};
+        filteredHistory.forEach(essay => {
+            types[essay.type] = (types[essay.type] || 0) + 1;
+        });
+
+        statsContent.innerHTML = `
+            <div class="grid">
+                <div class="item">
+                    <div class="item-header">
+                        <h4 class="item-title"><i class="fas fa-star"></i> Média de Notas</h4>
+                    </div>
+                    <p>${averageScore.toFixed(1)}/10</p>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <h4 class="item-title"><i class="fas fa-file-alt"></i> Total de Redações</h4>
+                    </div>
+                    <p>${essayCount} redações</p>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <h4 class="item-title"><i class="fas fa-tags"></i> Tipos de Redação</h4>
+                    </div>
+                    <ul>
+                        ${Object.entries(types).map(([type, count]) => `
+                            <li>${type}: ${count}</li>
+                        `).join('')}
+                    </ul>
+                </div>
+            </div>
+        `;
+    }
+
+    // Show notification
+    function showNotification(title, message, type) {
+        notificationTitle.textContent = title;
+        notificationMessage.textContent = message;
+        notification.className = `notification ${type} show`;
+
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 5000);
+    }
+
+    // Export essay
+    function exportEssay() {
+        const text = essayText.value;
+        const theme = essayTheme.value || 'Redação';
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${theme.replace(/\s+/g, '_')}.txt`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showNotification('Sucesso', 'Redação exportada com sucesso!', 'success');
+    }
+
+    // Improve essay button functionality
+    function improveEssay() {
+        showNotification('Info', 'Funcionalidade de melhoria de texto em desenvolvimento.', 'info');
+    }
+
+    // Save essay on input
+    essayText.addEventListener('input', saveCurrentEssay);
+    essayTheme.addEventListener('input', saveCurrentEssay);
+
+    // Initialize the app
+    init();
+</script>
+</body>
+</html>
